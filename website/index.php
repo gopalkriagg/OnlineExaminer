@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if($_SESSION["loggedin"] == TRUE) {
+	if($_SESSION["loggedin"]) {
 		header( 'Location: /franklin_website/stu_enroll.php' ) ; //One way to redirect
 		die();
 	}
@@ -49,21 +49,21 @@
 					$encpwd = $ipwd; //The encoded password
 					return $encpwd;
 				}
-				/* Following code connects to db, encode the pwd and check it with db, if matches redirect to login page else
-				 * 
+				
+				/* Following code connects to db,
+				 * encodes the password, 
+				 * compare userID and encoded pwd with that stored in db,
+				 * if matches redirects to logged in page else
+				 * sets the loginErr msg as wrong uid or pwd
 				 */
-				//set loginErr"please enter again"
-
 				
 				
-				include 'database.php';
-				$temp = $_POST["pwd"];
-				$pwd = encode($temp);
+				include 'database_connect.php'; //Includes code to connect to databse
+				
+				$pwd = encode($_POST["pwd"]);
 				
 				$sql = "SELECT * FROM STUDENTS WHERE id = '$_POST[userid]' AND pwd = '$pwd'";
-				echo $sql;
 				$result = $conn->query($sql);
-				echo var_dump($result);
 				if($result->num_rows == 1) {
 					$row = $result->fetch_assoc();
 					$_SESSION["username"] = $row["name"];
@@ -72,8 +72,8 @@
 					echo '<meta http-equiv="REFRESH" content="0" URL = "/franklin_website/stu_enroll.php">';
 				} 
 				else {
-					$loginErr == "Wrong username or password.";
-				}
+					$loginErr = "Wrong userID or password.";
+				} 
 	
 			}
 		}
@@ -88,24 +88,24 @@
     			<td width = "78">User Id</td>
     			<td width = "6">:</td>
 				<td width = "150"><input name = "userid" type = "text" id = "userid"  maxlength = "7"></td>
-				<td width = "300"<span class = "error"> <?php echo $useridErr; ?> </span> </td>
+				<td width = "300"><span class = "error"> <?php echo $useridErr; ?> </span> </td>
     		</tr>
     		<tr>
     			<td>Password</td>
     			<td>:</td>
     			<td><input name = "pwd" type = "password" id = "password"  maxlength = "30"></td>
-    			<td width = "300"<span class = "error"> <?php echo $pwdErr; ?> </span> </td>
+    			<td width = "300"><span class = "error"> <?php echo $pwdErr; ?> </span> </td>
     		</tr>
     		<tr>
     			<td colspan="3" align="center"><input type = "submit" name = "Submit" value = "Login">  </td>
 		    </tr>
 		    <tr>
-		    	<td colspan="3"> <?php echo $loginErr; ?></td>
+		    	<td colspan="3" align = "center"><span class = "error" ><?php echo $loginErr; ?></span></td>
 		    </tr>
     	</table>
    </form>
    
-   <a  href=\"register_student.php\" > new Student? </a>
+   <a  href=\"register_student.php\" > New Student? </a>
    
   </body>
   </html>
