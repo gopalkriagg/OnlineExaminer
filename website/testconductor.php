@@ -12,9 +12,64 @@
 <body>
 
 
-<p>
+<?
+
+
+$servername = "localhost";
+$username = "root";
+$password = "sqlpass";
+$db="OnlineExaminer";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $db);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+$idTest=$_GET["idTest"];
+
+$sql = "SELECT * FROM 'TESTS' WHERE id = '$idTest')";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+
+
+$sql = "SELECT * FROM 'QUES_CONTAINED' WHERE testID = '$idTest')";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+
+
+
+
+
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    echo "Select the test that you want to appear for:";
+    echo "
+    <FORM name =\"test\" method =\"post\" action =\"testconductor.php\"
+
+    ";
+    while($row = $result->fetch_assoc()) {
+     echo "<br> ID: ". $row["id"]. "&nbsp|&nbsp Set By: ". $row["setBy"]. "&nbsp|&nbsp <a href=\"testconductor.php?idTest=$row[id] \"> Give Test </a>";    
+    }
+} else {
+    echo "There are no tests schduled";
+}
+
+
+
+
+
+
+
+
+?>
 
  
+
 
 <div style="font-weight: bold" id="quiz-time-left"></div>
 <script type="text/javascript">
