@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	if($_SESSION["loggedin"]) {
-		header( 'Location: /franklin_website/stu_enroll.php' ) ; //One way to redirect
+	if($_SESSION["sloggedin"]) {
+		header( 'Location: ./stu_dashboard.php' ) ; //One way to redirect
 		die();
 	}
 
@@ -67,9 +67,10 @@
 				if($result->num_rows == 1) {
 					$row = $result->fetch_assoc();
 					$_SESSION["username"] = $row["name"];
+					$_SESSION["userid"]   = $row["id"];
 					$_SESSION["currentStatus"] = $row["currentStatus"];	
-					$_SESSION["loggedin"] = TRUE;
-					echo '<meta http-equiv="REFRESH" content="0" URL = "/franklin_website/stu_enroll.php">';
+					$_SESSION["sloggedin"] = TRUE;
+					echo '<meta http-equiv="REFRESH" content="0" URL = "./stu_dashboard.php">';
 				} 
 				else {
 					$loginErr = "Wrong userID or password.";

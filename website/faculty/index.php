@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if($_SESSION["loggedin"] == TRUE) {
+	if($_SESSION["floggedin"] == TRUE) {
 		header( 'Location: /franklin_website/stu_enroll.php' ) ; //One way to redirect
 		die();
 	}
@@ -15,7 +15,7 @@
 		.error {color: #FF0000}
 	</style>
     <title>
-        Student login - Online Examiner
+        Faculty login - OnlineExaminer
    	</title>
 </head>
 	
@@ -39,40 +39,44 @@
 		
 
 			if($x == TRUE) {
-				function encode($ipwd) { //ipwd is password to be encoded
-					//algo to encode pwd
-					//after encoding
-					return $ipwd;
-				}
-				//connect to db, encode the wd and check it with db, if matches redirect to login page else
-				//set loginErr"please enter again"
-				$servername =      "localhost";
-				$username   =           "root";
-				$password   =          "mysql";
-				$db         = "OnlineExaminer";
-				$conn = new mysqli($servername, $username, $password, $db);
-				if($conn->connect_error) {
-				die("Connection to database failed: " . $conn->connect_error);
+				/***********************************************************
+				 * encode   :  Encodes the argument string
+				 *   Args   :  The string to be encoded
+				 *   Returns:  The encoded string.
+				 ***********************************************************/
+				function encode($ipwd) {
+					//Alogrithm to encode pwd goes here
+					$encpwd = $ipwd; //The encoded password
+					return $encpwd;
 				}
 				
-				echo "<br>";
-				$temp = $_POST["pwd"];
-				$pwd = encode($temp);
+				/* Following code connects to db,
+				 * encodes the password, 
+				 * compare userID and encoded pwd with that stored in db,
+				 * if matches redirects to logged in page else
+				 * sets the loginErr msg as wrong uid or pwd
+				 */
 				
-				$sql = "SELECT * FROM STUDENTS WHERE id = '$_POST[userid]' AND pwd = '$pwd'";
-				echo $sql;
+				
+				include '../database_connect.php'; //Includes code to connect to databse
+				
+				$pwd = encode($_POST["pwd"]);
+				
+				$sql = "SELECT * FROM FACULTY WHERE id = '$_POST[userid]' AND pwd = '$pwd'";
+				
 				$result = $conn->query($sql);
-				echo var_dump($result);
+
 				if($result->num_rows == 1) {
 					$row = $result->fetch_assoc();
 					$_SESSION["username"] = $row["name"];
 					$_SESSION["currentStatus"] = $row["currentStatus"];	
-					$_SESSION["loggedin"] = TRUE;
+					$_SESSION["floggedin"] = TRUE;
 					echo '<meta http-equiv="REFRESH" content="0" URL = "/franklin_website/stu_enroll.php">';
 				} 
-				else {
-					$loginErr == "Wrong username or password.";
-				}
+				else { 
+					$loginErr = "Wrong userID or password.";
+				} 
+			
 	
 			}
 		}
@@ -87,26 +91,25 @@
     			<td width = "78">User Id</td>
     			<td width = "6">:</td>
 				<td width = "150"><input name = "userid" type = "text" id = "userid"  maxlength = "7"></td>
-				<td width = "300"<span class = "error"> <?php echo $useridErr; ?> </span> </td>
+				<td width = "300"><span class = "error"> <?php echo $useridErr; ?> </span> </td>
     		</tr>
     		<tr>
     			<td>Password</td>
     			<td>:</td>
     			<td><input name = "pwd" type = "password" id = "password"  maxlength = "30"></td>
-    			<td width = "300"<span class = "error"> <?php echo $pwdErr; ?> </span> </td>
+    			<td width = "300"><span class = "error"> <?php echo $pwdErr; ?> </span> </td>
     		</tr>
     		<tr>
     			<td colspan="3" align="center"><input type = "submit" name = "Submit" value = "Login">  </td>
 		    </tr>
 		    <tr>
-		    	<td colspan="3"> <?php echo $loginErr; ?></td>
+		    	<td colspan="3" align = "center"><span class = "error" ><?php echo $loginErr; ?></span></td>
 		    </tr>
     	</table>
    </form>
    
-   <a  href=\"register_student.php\" > new Student? </a>
+   <a  href=\"register_faculty.php\" > Sign up? </a>
    
   </body>
   </html>
-
 
