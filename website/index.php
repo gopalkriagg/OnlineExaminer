@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>
-        Student login
+        Student login - Online Examiner
     </title>
 </head>
 <body>
