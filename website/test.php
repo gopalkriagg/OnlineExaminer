@@ -49,6 +49,7 @@ if ($result->num_rows > 0) {
 
 ?>
 
+<a href="testconductor.php">Test conductor</a>
 
 </body>
 </html>
