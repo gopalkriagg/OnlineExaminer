@@ -34,7 +34,7 @@
 	
 	    ";
 	    while($row = $result->fetch_assoc()) {
-	     echo "<br> ID: ". $row["id"]. "&nbsp|&nbsp Set By: ". $row["setBy"]. "&nbsp|&nbsp <a href=\"testconductor.php?idTest=$row[id] \"> Give Test </a>";    
+	     echo "<br> ID: ". $row["id"]. "&nbsp|&nbsp Set By: ". $row["setBy"]. "&nbsp|&nbsp <a href=\"quiz.php?idTest=$row[id] \"> Give Test </a>";    
 	    }
 	} else {
 	    echo "There are no tests schduled";

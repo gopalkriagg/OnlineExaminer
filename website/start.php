@@ -24,9 +24,7 @@ if ($conn->connect_error) {
 
 $quiz_id = $_SESSION['quiz'];
 $length = $_SESSION['length'];
-$_SESSION['questions_array'] = $_SESSION['questions'];
-$current_question = array_shift($_SESSION['questions_array']);
-$_SESSION['counter'] = 1;
+$time = $_SESSION['time'];
 
 $counter = $_SESSION['counter'];
 ?>
@@ -40,48 +38,51 @@ $counter = $_SESSION['counter'];
 
     <div id="container" style="margin-left: 30px;">
 
-<form method="post" name="quiz" id="quiz_form" action="take_test1.php" >
-<?
-$query_quiz = "SELECT quesID FROM QUES_CONTAINED WHERE testid = '$idTest' ";//select only quesid
+<form method="post" name="quiz" id="quiz_form" action="finish_test.php" >
+
+<?php
+
+$query_quiz = "SELECT * FROM QUES_CONTAINED WHERE testid = '$quiz_id' ";//select only quesid
 
 $query_quiz_result = $conn->query($query_quiz);
 
-while($row = $query_quiz_result->fetch_assoc()) {
-      
-      $question = "SELECT * FROM QUESTIONS WHERE  id = '$row["quesID"]";   
+while($row = $query_quiz_result->fetch_assoc()) 
+{
+      $question = "SELECT * FROM QUESTIONS WHERE  id = '$row[quesID]'";   
       $q_result = $conn->query($question);
-        while($row1 = $q_result->fetch_assoc());
-        {
+        while($row1 = $q_result->fetch_assoc())
+        {   $q_counter= $row1['id'];
+            echo "$counter. ";
             echo "".$row1['descr']."<br>";
                     echo "<input type = 'radio'
-            name='radio' value='choiceA'>";
-                    echo "".$row1['A']."<br>";
+            name='$counter' value='A'>";
+                    echo "".$row1['choiceA']."<br>";
                     echo "<input type = 'radio'
-            name='radio' value='B'>";
+            name='$counter' value='B'>";
                     echo "".$row1['choiceB']."<br>";
                     echo "<input type = 'radio'
-            name='radio' value='C'>";
+            name='$counter' value='C'>";
                     echo "".$row1['choiceC']."<br>";
                     echo "<input type = 'radio'            
-            name='radio' value='D'>";
+            name='$counter' value='D'>";
                     echo "".$row1['choiceD']."<br>";
 
+            $counter++;
 
         }
 
-        
 
-    }
+}
 
-        
+      
 
 
-    }
+    
 
 
 ?>
 
-
+<input type="submit" value="Submit">  
 </form>
 
 
@@ -96,7 +97,7 @@ while($row = $query_quiz_result->fetch_assoc()) {
 
 <div style="font-weight: bold" id="quiz-time-left"></div>
 <script type="text/javascript">
-var max_time = <?php echo $row_2['num_timer'] ?>;
+var max_time = <?php echo "$time" ?>;
 var c_seconds  = 0;
 var total_seconds =60*max_time;
 max_time = parseInt(total_seconds/60);
