@@ -10,7 +10,7 @@
 	
 <head>
 	<title>
-		Home
+		Student Dashboard - OnlineExaminer
 	</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>

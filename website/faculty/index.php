@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if($_SESSION["floggedin"] == TRUE) {
-		header( 'Location: /franklin_website/stu_enroll.php' ) ; //One way to redirect
+		header( 'Location: ./fac_dashboard.php' ) ; //One way to redirect
 		die();
 	}
 
@@ -74,7 +74,7 @@
 					$_SESSION["username"] = $row["name"];
 					$_SESSION["currentStatus"] = $row["currentStatus"];	
 					$_SESSION["floggedin"] = TRUE;
-					echo '<meta http-equiv="REFRESH" content="0" URL = "/franklin_website/stu_enroll.php">';
+					echo '<meta http-equiv="REFRESH" content="0" URL = "./fac_dashboard.php">';
 				} 
 				else { 
 					$loginErr = "Wrong userID or password.";
