@@ -21,6 +21,9 @@
 	
 <body>
 	<?php
+		if($_GET["logout"] == "y") {
+			echo "You have been successfully logged out.<br>";
+		}
 		$useridErr = $pwdErr = $loginErr = "";
 		$x = TRUE;
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
