@@ -1,33 +1,15 @@
-<<!DOCTYPE html>
-<html>
-<head>
-	<title>
-		Database
-	</title>
-</head>
-<body>
-
 <?php
+	$servername =      "localhost";
+	$username   =           "root";
+	$password   =          "mysql";
+	$db         = "OnlineExaminer";
+	
+	$conn = new mysqli($servername, $username, $password, $db);
+	
+	if($conn->connect_error) {
+		die("Connection to database failed: " . $conn->connect_error);
+	}
+	else echo "Connection successful";
 
-$servername = "localhost";
-$username = "root";
-$password = "sqlpass";
-$db="online";
-
-// Create connection
-$cn = new mysqli($servername, $username, $password, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-else
-(echo "string";)
-
-
-
-
+	echo "<br>";
 ?>
-
-</body>
-</html>

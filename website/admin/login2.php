@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if($_SESSION["loggedin"] == TRUE) {
-		header( 'Location: localhost/franklin_website/stu_enroll.php' ) ; //One way to redirect
+		header( 'Location: /franklin_website/stu_enroll.php' ) ; //One way to redirect
 		die();
 	}
 
@@ -68,7 +68,7 @@
 					$_SESSION["username"] = $row["name"];
 					$_SESSION["currentStatus"] = $row["currentStatus"];	
 					$_SESSION["loggedin"] = TRUE;
-					echo '<meta http-equiv="REFRESH" content="0" URL = "/stu_enroll.php">';
+					echo '<meta http-equiv="REFRESH" content="0" URL = "/franklin_website/stu_enroll.php">';
 				} 
 				else {
 					$loginErr == "Wrong username or password.";
