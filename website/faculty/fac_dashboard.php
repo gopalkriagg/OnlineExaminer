@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if($_SESSION["floggedin"] != TRUE) { //i.e. if student is not logged in
+	if($_SESSION["floggedin"] != TRUE) { //i.e. if faculty is not logged in
 		header( 'Location: ./index.php' ) ; //One way to redirect
 		die();
 	}
@@ -17,8 +17,8 @@
 
 <body>
 
-	<div align="right"> Welcome <?php echo $_SESSION["username"]; ?>! &nbsp;&nbsp;&nbsp;<a href="./logout.php"> Log Out </a></div> 
-	<hr>
+		<div align="right"> Welcome <?php echo $_SESSION["username"]; ?>! &nbsp;&nbsp;&nbsp;<a href="./logout.php"> Log Out </a></div> 
+		<hr>
 	<ul>
 		<li><a href="add_ques.php">Add Question</a></li>
 		<li><a href="create_test.php">Create Test</a></li>
