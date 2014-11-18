@@ -10,7 +10,7 @@
 <html>
 <head>
 	<title>
-		Home - OnlineExaminer
+		Tests available - OnlineExaminer
 	</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
@@ -21,30 +21,27 @@
 	<?php
 	
 	include 'database_connect.php';
-	$sql = "SELECT id FROM TESTS WHERE NOT EXISTS ( SELECT testID FROM STU_RECORD WHERE stuID = '$_SESSION[userid]')";
-
+	$sql = " SELECT a.id, b.id FROM FACULTY a, TESTS b WHERE b.setBy = a.id AND b.id  NOT IN  ( SELECT testID AS id FROM STU_RECORD WHERE stuID ='$_SESSION[userid]');"; 
+	//SELECT * FROM TESTS WHERE NOT EXISTS ( SELECT testID FROM STU_RECORD WHERE stuID = '$_SESSION[userid]')"; //Proper validation of query to be checked
+	
 	
 	$result = $conn->query($sql);
 	
 	if ($result->num_rows > 0) {
-		// output data of each row
-		echo "Select the test that you want to appear for:"."<br>";
-	    echo "
-	    <FORM name =\"test\" method =\"post\" action =\"testconductor.php\"
-	
-	    ";
-	    while($row = $result->fetch_assoc()) {
-	     echo "<br> ID: ". $row["id"]. "&nbsp|&nbsp Set By: ". $row["setBy"]. "&nbsp|&nbsp <a href=\"quiz.php?idTest=$row[id] \"> Give Test </a>";    
+	    // output data of each row
+	    echo "Select the test that you want to appear for:" . "<br>";
+	    echo "<FORM name =\"test\" method =\"post\" action =\"testconductor.php\" ";
+	    while ($row = $result->fetch_assoc()) {
+	        echo "<br> ID: " . $row["id"] . "&nbsp|&nbsp Set By: " . $row["setBy"] . "&nbsp|&nbsp <a href=\"quiz.php?idTest=$row[id] \"> Give Test </a>";
 	    }
-	} else {
-	    echo "There are no tests schduled";
+	} 
+	else {
+	    echo "There are no available tests.";
 	}
 	
-	
-	
-	
 	?>
-	
+	<br>
+	<br>
 	<a href="testconductor.php">Test conductor</a>
 	
 </body>

@@ -9,24 +9,12 @@
 
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "sqlpass";
-$db="OnlineExaminer";
+	include 'database_connect.php'
+	
+	$quiz_id  = $_SESSION['quiz'];
+	$length  = $_SESSION['length'];
+	$time   = $_SESSION['time'];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$quiz_id = $_SESSION['quiz'];
-$length = $_SESSION['length'];
-$time = $_SESSION['time'];
-
-$counter = $_SESSION['counter'];
 ?>
 
 <html>
@@ -46,18 +34,20 @@ $query_quiz = "SELECT * FROM QUES_CONTAINED WHERE testid = '$quiz_id' ";//select
 
 $query_quiz_result = $conn->query($query_quiz);
 
+$counter = 1;
+
 while($row = $query_quiz_result->fetch_assoc()) 
 {
       $question = "SELECT * FROM QUESTIONS WHERE  id = '$row[quesID]'";   
       $q_result = $conn->query($question);
-        while($row1 = $q_result->fetch_assoc())
-        {   $q_counter= $row1['id'];
-            echo "$counter. ";
+       $row1 = $q_result->fetch_assoc();
+         $q_counter= $row1['id'];
+            echo "$counter) ";
             echo "".$row1['descr']."<br>";
-                    echo "<input type = 'radio'
-            name='$counter' value='A'>";
-                    echo "".$row1['choiceA']."<br>";
-                    echo "<input type = 'radio'
+               echo "<input type = 'radio' name='$counter' value='A'>";
+               echo "".$row1['choiceA']."<br>";
+               
+               echo "<input type = 'radio'
             name='$counter' value='B'>";
                     echo "".$row1['choiceB']."<br>";
                     echo "<input type = 'radio'
@@ -69,7 +59,7 @@ while($row = $query_quiz_result->fetch_assoc())
 
             $counter++;
 
-        }
+        
 
 
 }
