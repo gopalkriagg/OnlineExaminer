@@ -73,6 +73,7 @@
 
 				if($result->num_rows == 1) {
 					$row = $result->fetch_assoc();
+					$_SESSION["userid"] = $row["id"];
 					$_SESSION["username"] = $row["name"];
 					$_SESSION["currentStatus"] = $row["currentStatus"];	
 					$_SESSION["floggedin"] = TRUE;
