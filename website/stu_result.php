@@ -22,32 +22,21 @@
 
 <p>
  <?php
- 
-$servername = "localhost";
-$username = "root";
-$password = "sqlpass";
-$db="OnlineExaminer";
+ $user=$_SESSION['userid'];
+ include 'header.php';   
+    include 'database_connect.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
-
-$sql = "SELECT * FROM STU_RECORD where stuID='???????'";
+$sql = "SELECT * FROM STU_RECORD where stuID='$user'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     // output data of each row
+    echo "The marks of the tests that you have appeared for :";
     while($row = $result->fetch_assoc()) {
      echo "<br> Test ID: ". $row["testID"]. "&nbsp|&nbsp Marks: ". $row["marks"];
     }
 } else {
-    echo "0 results";
+    echo "<h3>You have not appeared for any tests.</h3>";
 }
 
 ?>

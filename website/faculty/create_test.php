@@ -8,19 +8,8 @@
 ?>
 
 <?php
-
-$servername = "localhost";
-$username = "root";
-$password = "sqlpass";
-$db="OnlineExaminer";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include '../database_connect.php';
+ include 'header.php';
 ?>
 
 <html>
@@ -38,12 +27,14 @@ if ($conn->connect_error) {
 
 <h2>Fill up details of the test</h2>
 
-<form action="test_created.php" method="post">
+<form  action="test_created.php" method="post">
  ID: <input type="text" name="id">
+<br>
 <br>
 Test Duration: <input type="text" name="testtime">
 <br>
-Select the questions that you want in the test:
+<br>
+<b>Select the questions that you want in the test:</b>
 
 <br>
 <?php
@@ -58,7 +49,7 @@ $q_result = $conn->query($question);
 
         
                     echo "<br><input type = 'checkbox'
-            name='$ques_list' value='$row1[id]'>";
+            name='ques_list[]' value='$row1[id]'>";
                     echo "".$row1['id'].".".$row1['descr']."<br>";
                     
             
