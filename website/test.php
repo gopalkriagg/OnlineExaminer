@@ -21,7 +21,7 @@
 	<?php
 	
 	include 'database_connect.php';
-	$sql = " SELECT a.id, b.id FROM FACULTY a, TESTS b WHERE b.setBy = a.id AND b.id  NOT IN  ( SELECT testID AS id FROM STU_RECORD WHERE stuID ='$_SESSION[userid]');"; 
+	$sql = " SELECT a.name, b.id FROM FACULTY a, TESTS b WHERE b.setBy = a.id AND b.id  NOT IN  ( SELECT testID AS id FROM STU_RECORD WHERE stuID ='$_SESSION[userid]');"; 
 	//SELECT * FROM TESTS WHERE NOT EXISTS ( SELECT testID FROM STU_RECORD WHERE stuID = '$_SESSION[userid]')"; //Proper validation of query to be checked
 	
 	
@@ -33,7 +33,11 @@
 
 	    
 	    while ($row = $result->fetch_assoc()) {
+<<<<<<< HEAD
 	        echo "<br> ID: " . $row["id"] . "&nbsp|&nbsp Set By: " . $row["setBy"] . "&nbsp|&nbsp <a href=\"quiz.php?idTest=$row[id] \"> Give Test </a><br>";
+=======
+	        echo "<br> ID: " . $row["id"] . "&nbsp|&nbsp Set By: " . $row["name"] . "&nbsp|&nbsp <a href=\"quiz.php?idTest=$row[id] \"> Give Test </a>";
+>>>>>>> c0cf99feb5305f2c383ef862c96eab21f02e49cb
 	    }
 	} 
 	else {
