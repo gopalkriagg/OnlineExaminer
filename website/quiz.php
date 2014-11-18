@@ -8,6 +8,7 @@
 
 <?php
 	include 'database_connect.php';
+	include 'header.php';
 	
 	$idTest=$_GET["idTest"];
 	
@@ -32,7 +33,7 @@
 <html>
 <head>
     <title>Quiz <?php echo "$idTest";?> - OnlineExaminer</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 </head>
   
  <body>
@@ -41,11 +42,16 @@
 	
 	<!-- create the header using the quiz id and name -->
 	<h1 style="text-align: center;">Quiz <?php echo $idTest ;?>: </h1>
-	
-	<h4>The quiz will have a total of <?php echo $length ;?> questions.</h4>
-	<h4>Maximum time allowed for the Quiz <?php echo $time ;?> minutes.</h4>
-	
-	<button onClick="parent.location='start.php'">Begin Quiz</button>
+	<h2>Instructions :</h2>
+	<br>
+
+	<h4>1.The quiz will have a total of <?php echo $length ;?> questions.</h4>
+	<h4>2.Maximum time allowed for the Quiz <?php echo $time ;?> minutes.</h4>
+	<h4>3.Do not click on back of refresh buttons during the test otherwise test would be automatically submitted.</h4>
+	<h4></h4>
+	<br>
+	<h3> Best of Luck! </h3>
+	<button class="btn btn-info" onClick="parent.location='start.php'">Begin Quiz</button>
 	
 	</div>
 </body>

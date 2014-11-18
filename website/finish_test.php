@@ -14,12 +14,13 @@
 <html>
 <head>
     <title>Quiz <?php echo "$idTest";;?></title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 </head>
   
 <body>
 	<?php
 		include './database_connect.php';
+		include 'header.php'
 		$marks = 0;
 		$sql = "SELECT correct_ans, counter from $_SESSION[table_name];";
 		$ques_details = $conn->query($sql);

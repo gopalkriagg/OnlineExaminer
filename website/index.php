@@ -17,9 +17,33 @@
     <title>
         Student login - OnlineExaminer
    	</title>
+   	   <link href="css/bootstrap.css" rel="stylesheet">
 </head>
 	
 <body>
+<nav class="navbar " role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" style=" font-size:30px">Online Examiner</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                    <li><a>Welcome Student !</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+                
+         </nav>
+
+	<hr>
+
 	<?php
 		if($_GET["logout"] == "y") {
 			echo "You have been successfully logged out.<br>";

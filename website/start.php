@@ -14,7 +14,7 @@
 <html>
   <head>
     <title>Quiz <?php echo mysql_real_escape_string($_GET['id']);?></title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
   
     
 
@@ -24,7 +24,31 @@
  
 <body>
 
-	<form method="post" name="quiz" id="quiz_form" action="finish_test.php" >
+	<nav class="navbar " role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" style=" font-size:30px">Online Examiner</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                    <li><a>Welcome <?php echo $_SESSION["username"]; ?>!</a>
+                            
+                    </ul>
+                </div>
+            </div>
+                
+         </nav>
+    <hr>
+
+	<div style="font-weight: bold" id="quiz-time-left"></div>
+	
+	<form  method="post" name="quiz" id="quiz_form" action="finish_test.php" >
 
 	<?php
 	
@@ -70,7 +94,7 @@
 			echo $ques_details['choiceC']."<br>";
 			
 			echo "<input type = 'radio' name='$counter' value='D'>";
-			echo $ques_details['choiceD']."<br>";
+			echo $ques_details['choiceD']."<br><br>";
 			
 			$sql_insert = "INSERT INTO $table_name values($ques_details[id], '$ques_details[correctChoice]', $counter, 'E');";
 			$conn->query($sql_insert);
@@ -80,7 +104,7 @@
 	
 	?>
 
-	<input type="submit" value="Submit">  
+	<input class="btn btn-info" type="submit" value="Submit">  
 	</form>
 
 	<div style="font-weight: bold" id="quiz-time-left"></div>

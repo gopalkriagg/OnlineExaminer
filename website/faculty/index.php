@@ -22,6 +22,30 @@
 </head>
 	
 <body>
+
+<nav class="navbar " role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" style=" font-size:30px">Online Examiner</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                    <li><a>Welcome Faculty !</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+                
+         </nav>
+
+	<hr>
+
 	<?php
 		if($_GET["logout"] == "y") {
 			echo "You have been successfully logged out.<br>";
@@ -89,7 +113,7 @@
 	?>
 	
 	<form  method = "POST" action = "<?php echo $_SERVER["PHP_SELF"]; ?>" autocomplete = "off">
-		<table class="table table-stripped" border="0" align="center" cellpadding="5" cellspacing="5" >
+		<table border="0" align="center" cellpadding="5" cellspacing="5" >
 			<tr>
     	    	<th colspan= "3"> Faculty Login </th>
 			</tr>
@@ -113,8 +137,6 @@
 		    </tr>
     	</table>
    </form>
-   
-   <a  href=\"register_faculty.php\" > Don't have account? </a>
    
   </body>
   </html>
