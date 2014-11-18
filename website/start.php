@@ -38,6 +38,9 @@
 		
 		$table_name = "$_SESSION[userid]$_SESSION[quiz]";
 		$_SESSION["table_name"] = $table_name;
+				
+		$sqldrop = "DROP TABLE $table_name;";
+		$conn->query($sqldrop);	
 
 		$sql_create_table = "CREATE TABLE $table_name( 
 							id int NOT NULL, 
