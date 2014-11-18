@@ -1,55 +1,40 @@
 <?php
 	session_start();
 	if($_SESSION["sloggedin"] != TRUE) { //i.e. if student is not logged in
-		header( 'Location: ./index.php' ) ; //One way to redirect
+		header( 'Location: ./index.php' ) ; 
+		die();
+	}
+	if($_SERVER["REQUEST_METHOD"] != "POST") {
+		header( 'Location: ./stu_dashboard.php' ) ; 
 		die();
 	}
 
 ?>
 
-<?php
-
-
-$servername = "localhost";
-$username = "root";
-$password = "sqlpass";
-$db="OnlineExaminer";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$idTest=$_SESSION['quiz'];
-
-
-
-
-
-
-?>
-
 <html>
-  <head>
+<head>
     <title>Quiz <?php echo "$idTest";;?></title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+  
+<body>
+	<?php
+		include './database_connect.php';
+		$marks = 0;
+		
+		$sql = "SELECT correct_ans, counter from $_SESSION[table_name];";
+		$ques_details = $conn->query($sql);
+		
+		while( $row = $ques_details->fetch_assoc()) {
+			if($_POST["$row[counter]"] == $row["correct_ans"]) {
+				$marks = $marks+1;
+			}
+		}
+		echo $marks;
+		$sql = "INSERT INTO STU_RECORD values('$_SESSION[userid]', '$_SESSION[quiz]', $marks);";
+		$conn->query($sql);
 
-
-  </head>
-  <body>
-   
-
-
-
-
-
-
-
-
-
-  </body>
-
+	?>
+</body>
 </html>
+   
