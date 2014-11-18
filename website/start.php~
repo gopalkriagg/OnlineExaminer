@@ -148,10 +148,6 @@ document.quiz.submit();
 window.onbeforeunload= function() {
 setTimeout('document.quiz.submit()',1);
 }
-function check()
-  {
-  return true();
-  }
 </script>
 
 
