@@ -21,7 +21,6 @@
 	<?php
 		include './database_connect.php';
 		$marks = 0;
-		
 		$sql = "SELECT correct_ans, counter from $_SESSION[table_name];";
 		$ques_details = $conn->query($sql);
 		
@@ -30,10 +29,11 @@
 				$marks = $marks+1;
 			}
 		}
-		echo $marks;
 		$sql = "INSERT INTO STU_RECORD values('$_SESSION[userid]', '$_SESSION[quiz]', $marks);";
 		$conn->query($sql);
-
+		
+		echo $marks;
+	
 	?>
 </body>
 </html>
