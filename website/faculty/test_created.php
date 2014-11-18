@@ -41,37 +41,58 @@ if ($conn->connect_error) {
  $testtime= $_POST["testtime"];
 //$_POST['ques_list']
 $flag=0;
-
-$sql = "INSERT INTO TESTS (id, given, setBy, time)
-VALUES ('$id', 'N', '$fac_id','$testtime')";
-
-if ($conn->query($sql) === TRUE) {
-    $flag=1;
-} 
-
-$sql1 = "INSERT INTO QUES_CONTAINED (testID, quesID)
-VALUES ('$id','$_key')";
+$N=0;
+$i=0;
+$ques = $_POST['ques_list'];
 
 
-foreach ($_POST['ques_list'] as $key) {
 
-    if ($conn->query($sql1) === TRUE) {
-        $flag=1;
-    } 
-    else{
-      $flag=0;
+ if(empty($ques)) 
+  {
+    echo("You didn't select any questions. <br>");
+   $flag=0;
+   }
+
+  else
+  {
+    $N = count($ques);
+ 
+    echo("You selected $N questions(s) for the test $id: <br> ");
+  }
+
+  for($i=0; $i < $N; $i++)
+    {
+      $sql1 = "INSERT INTO QUES_CONTAINED (testID, quesID) VALUES ('$id','$ques[$i]')";
+       
+       if ($conn->query($sql1) === TRUE) {
+          $flag=1;
+          echo($ques[$i] . " ");
+          } 
+        else{
+          $flag=0;
+
+          }
+      
     }
 
+$sql = "INSERT INTO TESTS (id, given, setBy, time) VALUES ('$id', 'N', '$fac_id','$testtime')";
+
+if ($flag==1) {
+  
+      if ($conn->query($sql) === TRUE) {
+          $flag=1;
+      }else{
+        $flag=0;
+      } 
 
 }
+
 
 
 if ($flag == 1) {
     echo "New Test successfully";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-echo "Error: " . $sql1 . "<br>" . $conn->error;
-
+ echo "Test creation failed. try again.";
 }
 
 

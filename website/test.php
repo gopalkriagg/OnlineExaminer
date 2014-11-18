@@ -17,7 +17,7 @@
 
 
 <body>
-	
+	<?php include 'header.php';?>
 	<?php
 	
 	include 'database_connect.php';
@@ -29,10 +29,15 @@
 	
 	if ($result->num_rows > 0) {
 	    // output data of each row
-	    echo "Select the test that you want to appear for:" . "<br>";
-	    echo "<FORM name =\"test\" method =\"post\" action =\"testconductor.php\" ";
+	    echo "<h3>Select the test that you want to appear for:</h3>" ;
+
+	    
 	    while ($row = $result->fetch_assoc()) {
+<<<<<<< HEAD
+	        echo "<br> ID: " . $row["id"] . "&nbsp|&nbsp Set By: " . $row["setBy"] . "&nbsp|&nbsp <a href=\"quiz.php?idTest=$row[id] \"> Give Test </a><br>";
+=======
 	        echo "<br> ID: " . $row["id"] . "&nbsp|&nbsp Set By: " . $row["name"] . "&nbsp|&nbsp <a href=\"quiz.php?idTest=$row[id] \"> Give Test </a>";
+>>>>>>> c0cf99feb5305f2c383ef862c96eab21f02e49cb
 	    }
 	} 
 	else {
@@ -42,7 +47,7 @@
 	?>
 	<br>
 	<br>
-	<a href="testconductor.php">Test conductor</a>
+	
 	
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 	$servername =      "localhost";
 	$username   =           "root";
-	$password   =          "mysql";
+	$password   =          "sqlpass";
 	$db         = "OnlineExaminer";
 	
 	$conn = new mysqli($servername, $username, $password, $db);

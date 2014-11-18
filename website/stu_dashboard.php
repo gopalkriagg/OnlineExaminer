@@ -17,16 +17,16 @@
 
 
 <body>
-
+<?php include 'header.php';?>
+<div  align="center">
+<h2>
+<form><input type="button" class="btn btn-info" value="Appear for a test" onClick="window.location.href='test.php'"></form>
 
 <h2>
-<a href="test.php"> Take Test</a></h2>
+<form><input type="button" class="btn btn-info" value="See results of tests" onClick="window.location.href='stu_result.php'"></form>
+</h2>
 
-
-<h2>
-<a href="stu_result.php"> see results </a></h2>
-
-
+</div>
 
 
 

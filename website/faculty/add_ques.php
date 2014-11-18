@@ -20,6 +20,8 @@
 
 <body>
 	<?php
+		include 'header.php';  
+
 		$descErr = $chaErr = $chbErr = $chcErr = $chdErr = $ansErr = $diffErr = "";
 		$x = TRUE;
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -65,58 +67,54 @@
 				
 				$conn->close();	
 			}
+	
 		}
 	?>
-	<div align="right">
-		Welcome <?php echo $_SESSION["username"]; ?>!
-		&nbsp;&nbsp;&nbsp;
-		<a href="./index.php"> Dashboard</a>
-		&nbsp;&nbsp;&nbsp;
-		<a href="./logout.php"> Log Out </a>
-	</div> 
-	<hr>
-	<form method = "POST" action="<?php echo $_SERVER["PHP_SELF"]?>" automcomplete = "off">
-		<table width="850" align="left" border="0" cellpadding="5" cellspacing="0" >
-			<tr>
-				<td width="100">*Enter Question</td>
-				<td><textarea maxlength="500" name="desc" rows="10" cols="60" ></textarea></td>
-				<td><span class="error"><?php echo $descErr; ?></span></td>
-			</tr>
-			<tr>
-				<td width="100">*Choice A</td>
-				<td><textarea maxlength="100" name="cha" rows="3" cols="60" ></textarea></td>
-				<td><span class="error"><?php echo $chaErr; ?></span></td>
-			</tr>
-			<tr>
-				<td width="100">*Choice B</td>
-				<td><textarea maxlength="100" name="chb" rows="3" cols="60" ></textarea></td>
-				<td><span class="error"><?php echo $chbErr; ?></span></td>
-			</tr>
-			<tr>
-				<td width="100">*Choice C</td>
-				<td><textarea maxlength="100" name="chc" rows="3" cols="60" ></textarea></td>
-				<td><span class="error"><?php echo $chcErr; ?></span></td>
-			</tr>
-			<tr>
-				<td width="100">*Choice D</td>
-				<td><textarea maxlength="100" name="chd" rows="3" cols="60" ></textarea></td>
-				<td><span class="error"><?php echo $chdErr; ?></span></td>
-			</tr>
-			<tr>
-				<td>*Correct answer</td>
-				<td><select id="ans" name="ans" >
+	<h3>Fill up details of the question:</h3>
+	<br>
+
+	<form class="form-horizontal" method = "POST" action="<?php echo $_SERVER["PHP_SELF"]?>" automcomplete = "off">
+				
+				*Enter Question
+				<textarea class="form-control" rows="3" maxlength="500" name="desc" cols="1" ></textarea>
+				<span class="error"><?php echo $descErr; ?></span>
+				<br>
+			
+			
+				*Choice A
+				<textarea class="form-control" rows="1" maxlength="100" name="cha" rows="3" cols="60" ></textarea>
+				<span class="error"><?php echo $chaErr; ?></span>
+				<br>
+			
+				*Choice B
+				<textarea class="form-control"  maxlength="100" name="chb" rows="1" cols="60" ></textarea>
+				<span class="error"><?php echo $chbErr; ?></span>
+			
+				<br>
+				*Choice C
+				<textarea class="form-control" maxlength="100" name="chc" rows="1" cols="60" ></textarea>
+				<span class="error"><?php echo $chcErr; ?></span>
+			
+				<br>
+				*Choice D
+				<textarea class="form-control" maxlength="100" name="chd" rows="1" cols="60" ></textarea>
+				<span class="error"><?php echo $chdErr; ?></span>
+			
+				<br>
+				*Correct answer
+				<select class="form-control" id="ans" name="ans" >
 					<option selected  hidden value="X">Select</option>
 					<option value="A">Choice A</option>
 					<option value="B">Choice B</option>
 					<option value="C">Choice C</option>
 					<option value="D">Choice D</option>
 					</select>
-				</td>
-				<td><span class="error"><?php echo $ansErr; ?></span></td>
-			</tr>
-			<tr>
-				<td>*Difficulty</td>
-				<td><select id="diff" name="diff" >
+				
+				<span class="error"><?php echo $ansErr; ?></span>
+				<br>
+			
+				*Difficulty
+				<select class="form-control" id="diff" name="diff" >
 					<option selected  hidden value="0">Select</option>
 					<option value="1">1</option>
 					<option value="2">2</option>
@@ -125,15 +123,15 @@
 					<option value="5">5</option>
 					</select>
 					5 represents most difficult
-				</td>
-				<td><span class="error"><?php echo $diffErr; ?></span></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Submit" name="submit"/></td>
-			</tr>
-			<tr>
-				<td colspan="2">* represents required field</td>
-			</tr>
-		</table>
+				
+				<span class="error"><?php echo $diffErr; ?></span>
+			
+				<br><br>
+				<input class="btn btn-info" type="submit" value="Submit" name="submit"/>
+			
+			
+				* represents required field
+			
+		
 	</form>
 </body>
