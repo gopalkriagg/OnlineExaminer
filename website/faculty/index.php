@@ -17,6 +17,8 @@
     <title>
         Faculty login - OnlineExaminer
    	</title>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 	
 <body>
@@ -86,7 +88,7 @@
 	?>
 	
 	<form  method = "POST" action = "<?php echo $_SERVER["PHP_SELF"]; ?>" autocomplete = "off">
-		<table width="600" border="0" align="center" cellpadding="5" cellspacing="5" >
+		<table class="table table-stripped" border="0" align="center" cellpadding="5" cellspacing="5" >
 			<tr>
     	    	<th colspan= "3"> Faculty Login </th>
 			</tr>
