@@ -15,7 +15,12 @@
   <head>
     <title>Quiz <?php echo mysql_real_escape_string($_GET['id']);?></title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+  
+    
+
+
   </head>
+
  
 <body>
 
@@ -75,46 +80,51 @@
 	<input type="submit" value="Submit">  
 	</form>
 
+	<div style="font-weight: bold" id="quiz-time-left"></div>
 
 	<script type="text/javascript">
-		var max_time      = <?php echo "$time" ?>;
-		var c_seconds     = 0;
-		var total_seconds = 60*max_time;
-		max_time          = parseInt(total_seconds/60);
-		c_seconds         = parseInt(total_seconds%60);
-		document.getElementById("quiz-time-left").innerHTML='Time Left: ' + max_time + ' minutes ' + c_seconds + ' seconds';
-		
-		function init() {
-			document.getElementById("quiz-time-left").innerHTML='Time Left: ' + max_time + ' minutes ' + c_seconds + ' seconds';
-			setTimeout("CheckTime()",999);
-		}
-		
-		function CheckTime(){
-			document.getElementById("quiz-time-left").innerHTML='Time Left: ' + max_time + ' minutes ' + c_seconds + ' seconds' ;
-			if(total_seconds <=0){
-				setTimeout('document.quiz.submit()',1);
-			}
-			else {
-			total_seconds = total_seconds -1;
-			max_time = parseInt(total_seconds/60);
-			c_seconds = parseInt(total_seconds%60);
-			setTimeout("CheckTime()",999);
-			}
-		
-		}
-		
-		init();
+	var max_time = <?php echo $time ?>;
+	var c_seconds  = 0;
+	var total_seconds =60*max_time;
+	max_time = parseInt(total_seconds/60);
+	c_seconds = parseInt(total_seconds%60);
+	document.getElementById("quiz-time-left").innerHTML='Time Left: ' + max_time + ' minutes ' + c_seconds + ' seconds';
+	function init(){
+	document.getElementById("quiz-time-left").innerHTML='Time Left: ' + max_time + ' minutes ' + c_seconds + ' seconds';
+	setTimeout("CheckTime()",999);
+	}
+	function CheckTime(){
+	document.getElementById("quiz-time-left").innerHTML='Time Left: ' + max_time + ' minutes ' + c_seconds + ' seconds' ;
+	if(total_seconds <=0){
+	setTimeout('document.quiz.submit()',1);
+	    
+	    } else
+	    {
+	total_seconds = total_seconds -1;
+	max_time = parseInt(total_seconds/60);
+	c_seconds = parseInt(total_seconds%60);
+	setTimeout("CheckTime()",999);
+	}
+
+	}
+	init();
+
 	</script>
-	
-	<script type="text/javascript">
-		function finishpage() {
-			alert("unload event detected!");
-			document.quiz.submit();
-		}
-		window.onbeforeunload = function() {
-			setTimeout('document.quiz.submit()',1);
-		}
-	</script>
+
+<script type="text/javascript">
+
+ function finishpage()
+{
+alert("unload event detected!");
+document.quiz.submit();
+}
+window.onbeforeunload= function() {
+setTimeout('document.quiz.submit()',1);
+}
+</script>
+
+
+
 
 </body>
 </html>
