@@ -8,6 +8,7 @@
 ?>
 
 <!DOCTYPE html>
+
 <html>
 	
 <head>
@@ -67,12 +68,12 @@
 
 			if($x == TRUE) {
 				/***********************************************************
-				 * encode   :  Encodes the argument string
+				 * encode   : here it Encodes the argument string
 				 *   Args   :  The string to be encoded
 				 *   Returns:  The encoded string.
 				 ***********************************************************/
 				function encode($ipwd) {
-					//Alogrithm to encode pwd goes here
+					//Alogrithm to encode pasword goes here
 					$encpwd = $ipwd; //The encoded password
 					return $encpwd;
 				}
@@ -81,7 +82,7 @@
 				 * encodes the password, 
 				 * compare userID and encoded pwd with that stored in db,
 				 * if matches redirects to logged in page else
-				 * sets the loginErr msg as wrong uid or pwd
+				 * sets the loginErr message as wrong uid or pwd
 				 */
 				
 				

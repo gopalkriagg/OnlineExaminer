@@ -138,5 +138,11 @@
    
   </body>
   </html>
+  <script>
+  function check()
+  {
+  return true();
+  }
+  </script>
 
 
